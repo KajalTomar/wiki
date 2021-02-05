@@ -1,48 +1,46 @@
 public class FileReader{
-	private List userList;
-	private List documents; 
-
-	private Document doc;
-	private Document doc2;
-
-	public FileReader(){
-		userList = new List();
-		documents = new List();
-	}
-
-	void readFile(){
-		userList.addFront(new Users("Bob"));
-		userList.addFront(new Users("Stacey"));
-		userList.addFront(new Users("Benny"));
-		userList.addFront(new Users("Jo"));
 	
-		doc = new Document("Document 1");
-		doc2 = new Document("Document 2");
+	Wiki wiki1;
 
-		documents.addLast(doc);
-		documents.addLast(doc2);
-		documents.addLast(new Document("Document 3"));
-		documents.addLast(new Document("Document 4"));
+	//-----------------------------------------------------------------------------------------
+	// Constructor
+	// ----------------------------------------------------------------------------------------
+	public FileReader(){
+		wiki1 = new Wiki();
+	} 
 
-		doc.append("Yo, what's up");
-		doc.append("Nothing much");
-		doc.print();
+	// -----------------------------------------------------------------------------------------
+	// ReadFile
+	//
+	// PURPOSE: Reads the file line by line and calls the correct methods to manipulate the wiki.
+	// INPUT: file name (String)
+	// -----------------------------------------------------------------------------------------
+	public void readFile(){
+		wiki1.user("Bob");
+		wiki1.user("Stacey");
+		wiki1.user("Benny");
+		wiki1.user("Jo");
 
-		doc2.append("Hi there duda");
-		//userList.print();
+		wiki1.printAllUsers();
 
-		doc2.print();
+		wiki1.create("Document 1", "Bob");
+		wiki1.create("Document 2", "Bob");
+		wiki1.create("Document 3", "Bob");
+		wiki1.create("Document 4", "Bob");
 
-		doc2.append("Fancy SHmansy");
+		wiki1.append("Document 1", "Bob", "Yo,what's up?");
+		wiki1.append("Document 1", "Bob", "Nothing much");
+		wiki1.append("Document 1", "Bob", "Niceeeee");
 
-		doc2.print();
+		wiki1.append("Document 2", "Bob", "Blah blah blah?");
+		wiki1.append("Document 2", "Bob", "BLah!!!!");
 
-		doc2.append("Yessss");
-		
-		doc2.print();
+		wiki1.append("Document 7", "Bob", "Niceeeee");
 
-
-
+		wiki1.print("Document 1");
+		wiki1.print("Document 2");
+		wiki1.print("Document 3");
+		wiki1.print("Document 4");
 	}
 
 }
