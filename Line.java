@@ -1,33 +1,36 @@
 class Line extends Entity{
 
-	private int lineNum; 
+	private int lineNumber; 
     private String line;
 
 	// -----------------------------------------------------------------------------------------
 	// void constructor
 	// -----------------------------------------------------------------------------------------
     public Line(){
-		lineNum = 0;
+		lineNumber = 0;
 		line = null;
 	}
 
 	// -----------------------------------------------------------------------------------------
 	// constructor
 	// -----------------------------------------------------------------------------------------
-    public Line(String line){
-		lineNum = 0;
+    public Line(String line, int lineNumber){
+		this.lineNumber = lineNumber;
 		this.line = line;
 	}
 
 	// -----------------------------------------------------------------------------------------
-	// isDuplicate
-	//
-	// PURPOSE: checks if the input line matches line.
-	// INPUT: line to compare with (String)
-	// OUTPUT: returns true if the lines match, otherwise it returns false.
+	// getLineNumber
+	// -----------------------------------------------------------------------------------------	
+	public int getLineNumber(){
+		return lineNumber;
+	}
+
 	// -----------------------------------------------------------------------------------------
-	public boolean isDuplicate(String duplicateLine){
-		return line.equals(duplicateLine);
+	// setLine
+	// -----------------------------------------------------------------------------------------	
+	public void setLine(String line){
+		this.line = line;
 	}
 
 	// -----------------------------------------------------------------------------------------
@@ -36,7 +39,7 @@ class Line extends Entity{
 	// PURPOSE: prints line.
 	// -----------------------------------------------------------------------------------------
 	public void print(){
-		System.out.print(line + " \n");
+		System.out.print(lineNumber + ": " + line + " \n");
 	} // print
 
 } // line

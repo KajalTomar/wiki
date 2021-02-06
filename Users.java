@@ -1,5 +1,5 @@
 public class Users extends Entity{
-	
+
 	private String username; // for now
 
 	// -----------------------------------------------------------------------------------------
@@ -26,7 +26,7 @@ public class Users extends Entity{
 	} // print
 
 	// -----------------------------------------------------------------------------------------
-	// print
+	// isDuplicate
 	//
 	// PURPOSE: to check if input 'name' matches username
 	// INPUT: name (String)

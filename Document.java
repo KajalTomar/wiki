@@ -3,7 +3,7 @@ class Document extends Entity{
 	private String title; // for now
 	private List versions;
 	private Version lastVersion; 
-
+	
 	// -----------------------------------------------------------------------------------------
 	// void contructor
 	// -----------------------------------------------------------------------------------------
@@ -22,6 +22,14 @@ class Document extends Entity{
 		versions = new List();
 		lastVersion = null;
 		// lastVersion = new Version(); do i need this?
+	}
+
+	public List getAllVerions(){
+		return versions;
+	}
+
+	public int totalVersions(){
+		return versions.getTotal();
 	}
   	
 	// -----------------------------------------------------------------------------------------

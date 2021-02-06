@@ -9,6 +9,7 @@ class Version extends Entity{
 	// -----------------------------------------------------------------------------------------
 	public Version(){
 		versionNumber = 0;
+		totalLines = 0;
 		listOfLines = new List();
 	}
 
@@ -16,9 +17,8 @@ class Version extends Entity{
 	// contructor
 	// -----------------------------------------------------------------------------------------
 	public Version(Version lastVersion){
-
+		totalLines = lastVersion.getTotalLines();
 		listOfLines = new List(); // create instance of List
-
 		// if a previous version of the document exists
 		if(lastVersion!=null){
 
@@ -26,17 +26,30 @@ class Version extends Entity{
 			listOfLines = lastVersion.getLines().copyList();
 		}
 
-	} 
+	} // Version
+
+	public int getVersionNumber(){
+		return versionNumber;
+	}
+
+	// -----------------------------------------------------------------------------------------
+	// getTotalLines
+	//
+	// PURPOSE: returns the current total number of lines
+	// -----------------------------------------------------------------------------------------
+	public int getTotalLines(){
+		return totalLines;
+	} // getTotalLines
 
 	// -----------------------------------------------------------------------------------------
 	// getLines
 	//
 	// PURPOSE: returns the current list of lines
-	// OUTPUT: returns the current list of lines 
 	// -----------------------------------------------------------------------------------------
 	public List getLines(){
 		return listOfLines;
 	} // getLines
+
 
 	// -----------------------------------------------------------------------------------------
 	// append
@@ -45,21 +58,35 @@ class Version extends Entity{
 	// INPUT: line to append (String)
 	// -----------------------------------------------------------------------------------------
 	public void append(String addLine){
-		Line line = new Line(addLine); // create a new line object with input 
+		totalLines++;
+
+		Line line = new Line(addLine, totalLines); // create a new line object with input 
 		listOfLines.addLast(line); // add this new line object to the list of lines so far
 	} // append
 
-	// -----------------------------------------------------------------------------------------
-	// isDuplicate
-	//
-	// PURPOSE: checks if the input line is the last line of this version. Could be used to 
-	// check if a duplicate line is being inserted in a document in a row. 
-	// INPUT: line to compare with (String)
-	// OUTPUT: returns true if line matches the last line of the current version.
-	// -----------------------------------------------------------------------------------------
-	public boolean isDuplicate(String line){	
-		return listOfLines.isDuplicate(line);
-	} // isDuplicate
+	public Node getLineAt(int lineNumber){
+		Node curr = listOfLines.getFirstItem();
+		Node foundLine = null;
+		boolean found = false;
+
+		while(curr != null && !false){
+			
+			Line line = (Line)curr.getData();
+
+			if (line.getLineNumber() == lineNumber){
+				foundLine = curr; 
+				found = true;
+			}
+
+			curr = curr.getNext();
+		}
+
+		if (!found){
+			System.out.println("NOT FOUND");
+		}
+
+		return foundLine;
+	}
 
 	// -----------------------------------------------------------------------------------------
 	// print

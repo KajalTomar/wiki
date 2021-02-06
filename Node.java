@@ -2,13 +2,15 @@ public class Node{
 	
 	private Entity data;
 	private Node next;
+	private Node prev;
 
 	//-----------------------------------------------------------------------------------------
 	// Void Constructor
 	// ----------------------------------------------------------------------------------------
 	public Node(){
 		this.data = null; 
-		this.next = null; 
+		this.next = null;
+		this.prev = null; 
 	}
 
 	//-----------------------------------------------------------------------------------------
@@ -16,6 +18,7 @@ public class Node{
 	// ----------------------------------------------------------------------------------------
 	public Node(Entity data, Node next){
 		this.data = data; 
+		this.prev = null;
 		this.next = next; 
 	}
 
@@ -40,7 +43,27 @@ public class Node{
 	} // getNext
 
 	// -----------------------------------------------------------------------------------------
-	// getNext
+	// getNextItem
+	//
+	// PURPOSE: accessor method
+	// OUTPUT: Returns next Entity
+	// -----------------------------------------------------------------------------------------
+	public Entity getNextItem(){
+		return next.getData();
+	} // getNext
+
+	// -----------------------------------------------------------------------------------------
+	// getPrev
+	//
+	// PURPOSE: accessor method
+	// OUTPUT: Returns prev (Node)
+	// -----------------------------------------------------------------------------------------
+	public Node getPrev(){
+		return prev;
+	} // getPrev
+
+	// -----------------------------------------------------------------------------------------
+	// setNext
 	//
 	// PURPOSE: sets next Node 
 	// INPUT: Node to set 'next' to
@@ -48,6 +71,16 @@ public class Node{
 	public void setNext(Node next){
 		this.next = next;
 	} // setNext
+
+	// -----------------------------------------------------------------------------------------
+	// setPrev
+	//
+	// PURPOSE: sets previous Node 
+	// INPUT: Node to set 'prev' node to
+	// -----------------------------------------------------------------------------------------
+	public void setPrev(Node prev){
+		this.prev = prev;
+	} // setPrev
 
 	// -----------------------------------------------------------------------------------------
 	// isDuplicate

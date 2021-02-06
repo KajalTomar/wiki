@@ -19,7 +19,7 @@ public class Wiki{
 	// -----------------------------------------------------------------------------------------
 	public void user(String userid) {  
         // check if duplicate
-		userList.addFront(new Users(userid));	
+		userList.addLast(new Users(userid));	
     } // user
 
     // -----------------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ public class Wiki{
 	// -----------------------------------------------------------------------------------------
     public void append(String docTitle, String userid, String content){
 
-        Document doc = (Document)documents.retrieve(docTitle);
+        Document doc = (Document)retrieve(documents, docTitle);
 
         if(doc != null){
              doc.append(content);
@@ -56,7 +56,7 @@ public class Wiki{
 	// INPUT: document title (String)
 	// -----------------------------------------------------------------------------------------
     public void print(String docTitle){
-        Document doc = (Document)documents.retrieve(docTitle);
+        Document doc = (Document)retrieve(documents, docTitle);
 
          if(doc != null){
             doc.print();
@@ -67,5 +67,120 @@ public class Wiki{
     public void printAllUsers(){
         userList.print();
     } // print all users
+
+    // JUST FOR TESTING - delete me
+    public void printUser(String userid){
+        Users u = (Users)retrieve(userList, userid);
+
+        if(u!=null){
+            u.print();
+            System.out.println();
+        }
+
+    } // print all users
+
+	// -----------------------------------------------------------------------------------------
+	// retrieve
+	//
+	// PURPOSE: Returns an entity type (user, document) based on a key (document name, username)
+	// INPUT: username, document title (String)
+	// OUTPUT: On success it returns an Entity. On failure it returns null and prints 'not found'.
+	// -----------------------------------------------------------------------------------------
+	private Entity retrieve(List list, String name){
+		Node dataAtNode = searchByName(list, name); 
+		Entity data = null;
+
+		if(dataAtNode != null){
+			data = dataAtNode.getData();
+		} else {
+			System.out.println("NOT FOUND");
+		}
+
+		return data;
+
+	} // retrieve
+
+    // -----------------------------------------------------------------------------------------
+	// isDuplicate
+	//
+	// PURPOSE: checks is an Entity with input key (String) already exists on the list.
+	// INPUT: username, document title (String)
+	// OUTPUT: Returns true if an Entity with the same key exists on the list, returns false
+	// otherwise. Prints the result.
+	// -----------------------------------------------------------------------------------------
+	public boolean isDuplicate(List list, String name){
+		boolean duplicate = false;
+
+		if(searchByName(list, name)!=null){
+			duplicate = true;
+			System.out.println("DUPLICATE");	
+		} 
+
+		return duplicate; 
+	} // isDuplicate
+
+    // -----------------------------------------------------------------------------------------
+	// searchByName
+	//
+	// PURPOSE: searchByNamees for an entity type (user, document) based on a key (document name, 
+	// username)
+	// INPUT: username, document title (String)
+	// OUTPUT: On success it returns the node corresponding to the Entity. On failure it returns 
+	// null.
+	// -----------------------------------------------------------------------------------------
+	private Node searchByName(List list, String name){
+		Node curr = list.getFirstItem(); 
+		Node foundAt = null;
+		boolean found = false;
+
+		while(curr != null && !false){
+			
+			if (curr.isDuplicate(name)){
+				foundAt = curr; 
+				found = true;
+			}
+
+			curr = curr.getNext();
+		}
+
+        if (!found){
+			System.out.println("NOT FOUND");
+		}
+
+		return foundAt;
+	} // searchByNameByName
+
+    public void replace(String docTitle, int lineNum, String replacementLine){
+        Document doc = (Document) retrieve(documents, docTitle);
+        Line line = null;
+
+        if(doc!= null){
+            if (lineNum <= doc.totalVersions() && lineNum > 0){
+                line = (Line) getLineN(doc, lineNum).getData();
+
+                if(line != null){
+                    line.setLine(replacementLine);
+                    System.out.println("SUCCESS");
+                }
+
+            } else {
+                System.out.println("FAIL");
+            }
+        }
+    }
+
+    private Node getLineN(Document doc, int lineNum){
+
+        Version version = (Version) doc.getAllVerions().getLastItem().getData();
+        Node lineAt = null; 
+        
+        if(version != null){
+            lineAt = version.getLineAt(lineNum);
+        }
+
+        return lineAt;
+    }
+
+    
 
 } // Wiki
