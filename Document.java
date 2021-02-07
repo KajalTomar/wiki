@@ -35,6 +35,25 @@ class Document extends Entity{
 		return versions;
 	}
 
+	public Version getThisVersion(int versionNum){
+		boolean found = false;
+		Version foundVersion = null;
+		Node curr = versions.getFirstItem();
+
+		if(curr != null && !found){
+			Version tempVer = (Version) curr.getData();
+			
+			if(tempVer.getVersionNumber() == versionNum){
+				foundVersion = tempVer;
+				found = true;
+			}
+
+			curr = curr.getNext();
+		}
+
+		return foundVersion;
+	}
+
 	public int totalVersions(){
 		return versions.getTotal();
 	}

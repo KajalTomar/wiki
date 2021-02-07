@@ -3,7 +3,7 @@ class Version extends Entity{
 	private int versionNumber;
 	private List listOfLines;
 	private int totalLines; 
-
+	
 	// -----------------------------------------------------------------------------------------
 	// void constructor
 	// -----------------------------------------------------------------------------------------
