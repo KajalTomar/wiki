@@ -2,7 +2,9 @@ class Document extends Entity{
 	
 	private String title; // for now
 	private List versions;
-	private Version lastVersion; 
+	private Version lastVersion;
+	private Users createdBy; 
+	private String edits;
 	
 	// -----------------------------------------------------------------------------------------
 	// void contructor
@@ -11,16 +13,21 @@ class Document extends Entity{
 		title = null;
 		versions = null;
 		lastVersion = null;
+		createdBy = null;
+		edits = "";
 		// lastVersion = new Version(); do i need this?
 	}
 
 	// -----------------------------------------------------------------------------------------
 	// contructor
 	// -----------------------------------------------------------------------------------------
-	public Document(String title){
+	public Document(String title, Users user){
 		this.title = title;
+		this.createdBy = user;
 		versions = new List();
 		lastVersion = null;
+		edits = "";
+		System.out.println("CONFIRMED");
 		// lastVersion = new Version(); do i need this?
 	}
 
@@ -32,6 +39,10 @@ class Document extends Entity{
 		return versions.getTotal();
 	}
   	
+	public void addEdit(String edit){
+		edits += edit + "\n";
+	}
+
 	// -----------------------------------------------------------------------------------------
 	// append
 	//
@@ -49,7 +60,7 @@ class Document extends Entity{
 			// create a new Version by sending along the most recent one.
 			newVersion = new Version(lastVersion);
 		}
-	
+
 		newVersion.append(line); // append line to this new version
 		lastVersion = newVersion; // update last version to the latest one
 		versions.addLast(newVersion); // add new version to the list of all versions
@@ -69,6 +80,12 @@ class Document extends Entity{
 		if(lastVersion != null){
 			lastVersion.print();
 		 }
+		
+	} // print
+
+	public void history(){
+		System.out.println("----------");
+		System.out.println(edits);
 		
 	} // print
 

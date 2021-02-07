@@ -57,14 +57,18 @@ public class FileReader{
 		// wiki1.print("Document 3");
 		// wiki1.print("Document 4");
 
-		wiki1.replace("Document 1",2,"THIS IS A NEW LINE");
-		wiki1.replace("Document 1",5,"THIS IS A NEW LINE");
-		wiki1.replace("Document 1",11,"THIS IS A NEW LINE");
-		wiki1.replace("Document 1",1,"THIS IS A NEW LINE");
-		wiki1.replace("Document 2",0,"THIS IS A NEW LINE");
-		wiki1.replace("Document 90",2,"THIS IS A NEW LINE");
+		// REPLACEMENTS ARE NOT CREATNG NEW VERSIONS
+
+		wiki1.replace("Document 1","Bob",2,"THIS IS A NEW LINE");
+		wiki1.replace("Document 1","Bob",5,"THIS IS A NEW LINE");
+		wiki1.replace("Document 1","Bob",11,"THIS IS A NEW LINE");
+		wiki1.replace("Document 1","Stacey",1,"THIS IS A NEW LINE");
+		wiki1.replace("Document 2","Bob",0,"THIS IS A NEW LINE");
+		wiki1.replace("Document 90","Kajal",2,"THIS IS A NEW LINE");
 
 		wiki1.print("Document 1");
+
+		wiki1.history("Document 1");
 	}
 
 }

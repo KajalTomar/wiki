@@ -60,7 +60,7 @@ class Version extends Entity{
 	public void append(String addLine){
 		totalLines++;
 
-		Line line = new Line(addLine, totalLines); // create a new line object with input 
+		Line line = new Line(addLine, totalLines-1); // create a new line object with input 
 		listOfLines.addLast(line); // add this new line object to the list of lines so far
 	} // append
 
