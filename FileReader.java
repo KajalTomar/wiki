@@ -21,13 +21,6 @@ public class FileReader{
 		wiki1.user("Benny");
 		wiki1.user("Jo");
 
-		wiki1.printUser("Bob");
-		wiki1.printUser("Stacey");		
-		wiki1.printUser("Benny");		
-		wiki1.printUser("Jo");		
-		wiki1.printUser("Bobby");		
-		wiki1.printUser("Bo");
-
 		System.out.println("-----------------------------------------");
 
 		wiki1.create("Document 1", "Bob");
@@ -50,7 +43,7 @@ public class FileReader{
 		wiki1.append("Document 1", "Bob", "THis is a line");
 		wiki1.append("Document 1", "Bob", "I know it is.");
 
-		wiki1.append("Document 7", "Bob", "Niceeeee");
+		//wiki1.append("Document 7", "Bob", "Niceeeee");
 
 		//wiki1.print("Document 1");
 		// wiki1.print("Document 2");
@@ -63,12 +56,20 @@ public class FileReader{
 		wiki1.replace("Document 1","Bob",5,"THIS IS A NEW LINE");
 		wiki1.replace("Document 1","Bob",11,"THIS IS A NEW LINE");
 		wiki1.replace("Document 1","Stacey",1,"THIS IS A NEW LINE");
-		wiki1.replace("Document 2","Bob",0,"THIS IS A NEW LINE");
+		wiki1.replace("Document 1","Bob",0,"THIS IS A NEW LINE");
 		wiki1.replace("Document 90","Kajal",2,"THIS IS A NEW LINE");
 
 		wiki1.print("Document 1");
 
 		wiki1.history("Document 1");
+
+		wiki1.userReport("Bob");
+		wiki1.userReport("Stacey");		
+		wiki1.userReport("Benny");		
+		wiki1.userReport("Jo");		
+		wiki1.userReport("Bobby");		
+		wiki1.userReport("Bo");
+		
 	}
 
 }

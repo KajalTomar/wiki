@@ -8,7 +8,7 @@ class Version extends Entity{
 	// void constructor
 	// -----------------------------------------------------------------------------------------
 	public Version(){
-		versionNumber = 0;
+		versionNumber = 1;
 		totalLines = 0;
 		listOfLines = new List();
 	}
@@ -16,17 +16,36 @@ class Version extends Entity{
 	// -----------------------------------------------------------------------------------------
 	// contructor
 	// -----------------------------------------------------------------------------------------
-	public Version(Version lastVersion){
+	public Version(Version lastVersion, int versionNumber){
+		this.versionNumber = versionNumber+1;
 		totalLines = lastVersion.getTotalLines();
-		listOfLines = new List(); // create instance of List
+		List newList = new List(); // create instance of List
 		// if a previous version of the document exists
 		if(lastVersion!=null){
-
 			// copy all the lines of the previous version to the current version
-			listOfLines = lastVersion.getLines().copyList();
+			listOfLines = versionClone(lastVersion.getLines());
 		}
 
 	} // Version
+
+	// -----------------------------------------------------------------------------------------
+	// versionClone
+	//
+	// PURPOSE: creates a new list that is a clone of the this current list.
+	// OUTPUT: Returns a clones List 
+	// -----------------------------------------------------------------------------------------
+	public List versionClone(List listofLines){
+		List copiedLines = new List();
+		Node curr = listofLines.getFirstItem();
+
+		while(curr != null){
+			Line temp = new Line((Line) curr.getData());
+			copiedLines.addLast(temp);
+			curr = curr.getNext();
+		}
+
+		return copiedLines;
+	} // copyList
 
 	public int getVersionNumber(){
 		return versionNumber;
@@ -94,6 +113,7 @@ class Version extends Entity{
 	// PURPOSE: print this version of the document.
 	// -----------------------------------------------------------------------------------------
 	public void print(){
+			//System.out.println("VERSION: "+versionNumber);
 			listOfLines.print();	
 	} // print
 

@@ -5,6 +5,7 @@ class Document extends Entity{
 	private Version lastVersion;
 	private Users createdBy; 
 	private String edits;
+	private int time;
 	
 	// -----------------------------------------------------------------------------------------
 	// void contructor
@@ -15,15 +16,18 @@ class Document extends Entity{
 		lastVersion = null;
 		createdBy = null;
 		edits = "";
+		time = -1;
 		// lastVersion = new Version(); do i need this?
 	}
 
 	// -----------------------------------------------------------------------------------------
 	// contructor
 	// -----------------------------------------------------------------------------------------
-	public Document(String title, Users user){
+	public Document(String title, Users user, int time){
 		this.title = title;
 		this.createdBy = user;
+		this.time = time;
+
 		versions = new List();
 		lastVersion = null;
 		edits = "";
@@ -35,6 +39,10 @@ class Document extends Entity{
 		return versions;
 	}
 
+	public Users createdBy(){
+		return createdBy;
+	}
+
 	public Version getThisVersion(int versionNum){
 		boolean found = false;
 		Version foundVersion = null;
@@ -42,7 +50,7 @@ class Document extends Entity{
 
 		if(curr != null && !found){
 			Version tempVer = (Version) curr.getData();
-			
+
 			if(tempVer.getVersionNumber() == versionNum){
 				foundVersion = tempVer;
 				found = true;
@@ -56,6 +64,10 @@ class Document extends Entity{
 
 	public int totalVersions(){
 		return versions.getTotal();
+	}
+
+	public Version getLatestVersion(){
+		return lastVersion;
 	}
   	
 	public void addEdit(String edit){
@@ -77,7 +89,7 @@ class Document extends Entity{
 			newVersion = new Version();
 		} else {
 			// create a new Version by sending along the most recent one.
-			newVersion = new Version(lastVersion);
+			newVersion = new Version(lastVersion, versions.getTotal());
 		}
 
 		newVersion.append(line); // append line to this new version
@@ -85,6 +97,12 @@ class Document extends Entity{
 		versions.addLast(newVersion); // add new version to the list of all versions
 	
 	} // append
+
+	public void copyVersion(){
+		Version newVersion = new Version(lastVersion, versions.getTotal());	
+		lastVersion = newVersion;
+		versions.addLast(newVersion); // add new version to the list of all versions
+	}
 
 	// -----------------------------------------------------------------------------------------
 	// print
@@ -95,10 +113,12 @@ class Document extends Entity{
 		System.out.println("----------");
 		System.out.print(title + " | Number of versions: " + versions.getTotal() + "\n");
 	
-		// if at least one version exsits then call the version's print method
+	//	if at least one version exsits then call the version's print method
 		if(lastVersion != null){
 			lastVersion.print();
 		 }
+
+		// versions.print();
 		
 	} // print
 

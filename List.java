@@ -79,22 +79,5 @@ public class List{
 		return total;
 	}
 
-	// -----------------------------------------------------------------------------------------
-	// copyList
-	//
-	// PURPOSE: creates a new list that is a clone of the this current list.
-	// OUTPUT: Returns a clones List 
-	// -----------------------------------------------------------------------------------------
-	public List copyList(){
-		List newCopy = new List();
-		Node curr = head;
-
-		while(curr != null){
-			newCopy.addLast(curr.getData());
-			curr = curr.getNext();
-		}
-		return newCopy;
-	} // copyList
-
 
 } // List

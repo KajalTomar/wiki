@@ -4,11 +4,13 @@ public class Wiki{
     
     private List userList;
 	private List documents; 
+	private int time; 
     
     //-----------------------------------------------------------------------------------------
 	// Constructor
 	// ----------------------------------------------------------------------------------------
 	public Wiki(){
+		time = -1;
 		userList = new List();
 		documents = new List();
 	} 
@@ -20,13 +22,14 @@ public class Wiki{
 	// INPUT: userid (String)
 	// -----------------------------------------------------------------------------------------
 	public void user(String userid) {  
-        
+		time++;
+
 		if (duplicateUser(userid)){
 			// if the userid is already taken
 			System.out.println("DUPLICATE");
 		} else if (characterLength(userid)<= 80){
 			// if the user id is unique and has less than 80 non-whitespace characters
-			userList.addLast(new Users(userid));
+			userList.addLast(new Users(userid, time));
 		} 
 
     } // user
@@ -39,14 +42,11 @@ public class Wiki{
 	// INPUT: document title, userid (String)
 	// -----------------------------------------------------------------------------------------
     public void create(String docTitle, String userid) {
+		time++;
+		Users user = handleUser(userid); // check if the user exists and returns it if it does
 
-		if(!duplicateUser(userid)){ 
-			// user does not exist
-			System.out.println("NOT FOUND");
-		} else{
+		if (user != null){
 			// the user exists 
-			Users user = retrieveUser(userid);
-			user.addCommand("create"); // update user's command history 
 
 			if (duplicateDocument(docTitle)){	
 				// a document with the exact same title already exists
@@ -56,13 +56,15 @@ public class Wiki{
 					// no document with this title exists yet
 					// and the title has less than or equal to 80 non-whitespace chatacters
 
-					Document doc = new Document(docTitle, user);
-					doc.addEdit("created by "+userid+". (version 0)");
+					Document doc = new Document(docTitle, user, time); // create a new document
+					doc.addEdit("t"+time+" v0: "+userid+" created new document \"" + docTitle +"\""); // add to the history of the document
+					documents.addLast(doc); // add the document to Wiki's list of document
+
+					// update user
 					user.addCreatedDocs(doc);
-					documents.addLast(doc);
-				}
+					user.addCommand("t" +time+ " CREATE \"" + docTitle +"\". (v0)");
+			}
 		}
-		
 		
     } // create
 
@@ -73,72 +75,65 @@ public class Wiki{
 	// INPUT: document title, userid, content (String)
 	// -----------------------------------------------------------------------------------------
     public void append(String docTitle, String userid, String content){
-		if(!duplicateUser(userid)){
-			// the user does not exist
-			System.out.println("NOT FOUND");
-		} else {
-			// the user exists
-			Users user = retrieveUser(userid);
-			user.addCommand("append");
+		time++;
+		Users user = handleUser(userid); // check if the user exists and returns user.
+		Document doc = handleDocument(docTitle); // checks if the document exists, prints not found if it doesn't. Returns deocument.
 
-			if (!duplicateDocument(docTitle)) {
-				// the document does not exists 
-				System.out.println("NOT FOUND");
+		if(user!=null && doc!=null){
+			// the user and document exist
 
-			} else {
-				// the user and the document exist
+			doc.append(content); 
+			doc.addEdit("t"+time+" v"+doc.totalVersions()+": "+userid+" appended \""+content+"\" "); // add to the history of the document
 
-				Document doc = retrieveDocument(docTitle);
-				doc.append(content);
-				doc.addEdit("append by "+userid+". (version "+ doc.totalVersions()+ ")");
-				System.out.println("SUCCESS");
-			}
+			// update user
+			user.addCommand("t"+time+": APPEND \""+docTitle+"\" \""+content+"\". (v"+ doc.totalVersions()+")");
+			System.out.println("SUCCESS");
 		}
+		
     } // append
 
 	public void replace(String docTitle, String userid, int lineNum, String replacementLine){
+		time++;
+		Users user = handleUser(userid); // check if the user exists and adds the command to user history if it does
+		Document doc = handleDocument(docTitle); // checks if the document exists, prints not found if it doesn't 
         Line line = null;
+		String oldLine;
 
-		if(!duplicateUser(userid)){
-			// the user does not exist
-			System.out.println("NOT FOUND");
-		} else {
-			// the user exists
-			Users user = retrieveUser(userid);
-			user.addCommand("replace");
-
-			if (!duplicateDocument(docTitle)) {
-				// the document does not exists 
-				System.out.println("NOT FOUND");
-
-			} else {
+		if(user != null && doc!=null && doc.totalVersions() > 0){
 			// user and document exists
+
+			doc.copyVersion(); // this creates a new version that is identical to the current version
 			
-				Document doc = retrieveDocument(docTitle);
-				
-				if (lineNum <= doc.totalVersions() && lineNum > 0){
-					// user and document exists and lineNumber is valid
-					line = (Line) getLineN(doc, lineNum).getData();
+			doc = retrieveDocument(docTitle);// retrieve it again because it's been updated
+			
+			if (lineNum >= 0 && lineNum <= doc.getLatestVersion().getTotalLines()){
+				// user and document exists and lineNumber is valid
+				line = retrieveLine(doc, lineNum);
+				oldLine = line.getLine();
+				if(line != null){
+					line.setLine(replacementLine);
+					doc.addEdit("t"+time+" v"+doc.totalVersions()+": "+userid+" replaced line "+lineNum); // add to the history of the document
+					doc.addEdit("\t\""+oldLine+"\" ---> \""+replacementLine+"\"");
 
-					if(line != null){
-						line.setLine(replacementLine);
-							doc.addEdit("Replaced line "+lineNum+" by "+userid +". (version " + doc.totalVersions() + ")");
-						System.out.println("SUCCESS");
-					} else {
-						System.out.println("FAIL");
-					}
-
+					user.addCommand("t"+time+": REPLACE \""+docTitle+"\" "+lineNum+" \""+replacementLine+"\". (v"+ doc.totalVersions()+")");
+					System.out.println("SUCCESS");
 				} else {
-					// there is no line number lineNum
 					System.out.println("FAIL");
 				}
+
+			} else {
+				// there is no line number lineNum
+				System.out.println("FAIL");
 			}
+			
 		}
 
     } // replace
 
 	private void delete(String docTitle, String userid, int lineNum){
-        Document doc = retrieveDocument(docTitle);
+		time++;
+		Users user = handleUser(userid); // check if the user exists and adds the command to user history if it does
+		Document doc = retrieveDocument(docTitle);
         Line line = null;
 	}
 
@@ -149,6 +144,7 @@ public class Wiki{
 	// INPUT: document title (String)
 	// -----------------------------------------------------------------------------------------
     public void print(String docTitle){
+		time++;
         Document doc = retrieveDocument(docTitle);
 
          if(doc != null){
@@ -157,11 +153,18 @@ public class Wiki{
     } // print
 
 	public void history(String docTitle){
-		 Document doc = retrieveDocument(docTitle);
+		time++;
+		Document doc = retrieveDocument(docTitle);
 
-         if(doc != null){
+        if(doc != null){
+			System.out.println("*************************************************");
+			System.out.println("HISTORY FOR "+docTitle.toUpperCase());
+			System.out.println("created by: "+doc.createdBy().getUserId());
+
+			System.out.println("time version: user's edit");
             doc.history();
-         }
+			System.out.println();
+        }
 	}
 
     // JUST FOR TESTING - delete me
@@ -169,14 +172,22 @@ public class Wiki{
         userList.print();
     } // print all users
 
-    // JUST FOR TESTING - delete me
-    public void printUser(String userid){
-        Users u = retrieveUser(userid);
+	   // JUST FOR TESTING - delete me
+    public void printAllDocs(){
+        documents.print();
+    } // print all users
 
-        if(u!=null){
-            u.print();
-            System.out.println();
-        }
+
+    public void userReport(String userid){
+        Users user = retrieveUser(userid);
+
+        if(user==null){
+			System.out.println("NOT FOUND");
+        } else {
+			user.print();
+		}
+
+		System.out.println();
 
     } // print all users
 
@@ -195,9 +206,7 @@ public class Wiki{
 
 		if(dataAtNode != null){
 			data = dataAtNode.getData();
-		} else {
-			System.out.println("NOT FOUND");
-		}
+		} 
 
 		return data;
 
@@ -210,6 +219,39 @@ public class Wiki{
 	private Users retrieveUser(String userid){
 		return (Users) retrieve(userList, userid);
 	}
+
+	private Line retrieveLine(Document doc, int lineNum){
+		// get the current version of the document
+		Version version = null;
+        Node lineAt = null; 
+		Line line = null;
+
+		if(doc.totalVersions() != 0){
+			// at least on version exists 
+			version = (Version) doc.getAllVerions().getLastItem().getData();
+            lineAt = version.getLineAt(lineNum); // does this line exist in the list?
+
+			if(lineAt != null){
+				// the line exists in the list of lines!
+
+				line = (Line) lineAt.getData(); // retrieve the content of this line
+			}
+        } 
+
+		return line;
+	}
+
+	// private Node getLineN(Document doc, int lineNum){
+
+    //     Version version = (Version) doc.getAllVerions().getLastItem().getData();
+    //     Node lineAt = null; 
+        
+    //     if(version != null){
+    //         lineAt = version.getLineAt(lineNum);
+    //     }
+
+    //     return lineAt;
+    // }  
 
     // -----------------------------------------------------------------------------------------
 	// isDuplicate
@@ -229,8 +271,36 @@ public class Wiki{
 		return duplicate; 
 	} // isDuplicate
 
+	private Users handleUser(String userid){
+		Users user = null;
+
+		if(!duplicateUser(userid)){ 
+			// user does not exist
+			System.out.println("NOT FOUND");
+		} else{
+			// the user exists 
+			user = retrieveUser(userid);
+		}
+	 
+	 	return user;
+	}
+
+
+	private Document handleDocument(String title){
+		Document doc = null;
+
+		if(!duplicateDocument(title)){
+			// the document does not exist
+			System.out.println("NOT FOUND");
+		} else {
+			doc = retrieveDocument(title);
+		}
+
+		return doc;
+	}
+
 	private boolean duplicateUser(String userid){
-		return isDuplicate(userList, userid);
+		return isDuplicate(userList, userid);	 
 	}
 
 	private boolean duplicateDocument(String title){
@@ -263,18 +333,7 @@ public class Wiki{
 
 		return foundAt;
 	} // searchByNameByName
-
-    private Node getLineN(Document doc, int lineNum){
-
-        Version version = (Version) doc.getAllVerions().getLastItem().getData();
-        Node lineAt = null; 
-        
-        if(version != null){
-            lineAt = version.getLineAt(lineNum);
-        }
-
-        return lineAt;
-    }    
+  
 
 	private int characterLength(String line){
 		String tempLine = line; 
