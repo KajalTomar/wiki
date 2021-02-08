@@ -1,4 +1,4 @@
-import java.lang.String;
+//import java.lang.String;
 
 public class Wiki{
     
@@ -181,7 +181,8 @@ public class Wiki{
     } // print all User
 
 	public void quit(){
-		System.out.println("BYE");
+
+		System.out.print("\n********\nBYE\n");
 	}
 
 	

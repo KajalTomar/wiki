@@ -1,0 +1,17 @@
+USER mike                                                                                 
+CREATE Object_Oriented_Programming mike                                                  
+CREATE Operating_System mike                                                           
+CREATE Graph_Theory ali     
+USER ali                                                              
+APPEND Object_Oriented_Programming mike OO programming is awesome.                       
+APPEND Object_Oriented_Programming ali I love OO programing. 
+REPLACE Object_Oriented_Programming ali 1 I hate OO programing. 
+DELETE Object_Oriented_Programming mike 1  
+RESTORE mike  Object_Oriented_Programming 5 
+#ignore me
+# also me                                             
+USERREPORT mike
+USERREPORT ali
+HISTORY Object_Oriented_Programming
+PRINT Object_Oriented_Programming
+QUIT

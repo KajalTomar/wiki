@@ -37,7 +37,7 @@ class Document extends Entity{
 		// update user
 		user.addCreatedDocs(this); // may not need this
 		user.addCommand("t" +time+ " CREATE \"" + title +"\".");
-		System.out.println("CONFIRMED. You just created a new document called \""+title+"\"!");
+		System.out.println("CONFIRMED. "+user.getUserId()+" just created a new document called \""+title+"\"!");
 		// lastVersion = new Version(); do i need this?
 	}
 
@@ -175,7 +175,7 @@ class Document extends Entity{
 	    Line line = null;
 		String oldLine;
 
-		if (lineNum >= 0 && lineNum < lastVersion.getTotalLines()-1){
+		if (lineNum >= 0 && lineNum < lastVersion.getTotalLines()){
 				// lineNumber is valid
 				
 				copyVersion(lastVersion,atTime); // this creates a new version that is identical to the current version
@@ -186,8 +186,7 @@ class Document extends Entity{
 					line.setLine(replacementLine);
 					System.out.println("SUCCESS. Line "+lineNum+" has been replaced.");
 
-					addEdit("t"+atTime+": "+user.getUserId()+" replaced line "+lineNum); // add to the history of the document
-					addEdit("\t\""+oldLine+"\" ---> \""+replacementLine+"\"");
+					addEdit("t"+atTime+": "+user.getUserId()+" replaced line "+lineNum+" \""+oldLine+"\" ---> \""+replacementLine+"\""); // add to the history of the document
 
 					user.addCommand("t"+atTime+": REPLACE \""+title+"\" "+lineNum+" \""+replacementLine+"\".");
 				} else {
@@ -206,7 +205,7 @@ class Document extends Entity{
 		Line oldLine = null; 
 		String oldLineContent; 
 
-		if(lineNum < lastVersion.getTotalLines()-1 && lineNum >= 0){
+		if(lineNum < lastVersion.getTotalLines() && lineNum >= 0){
 			copyVersion(lastVersion, atTime); // this creates a new version that is identical to the current version
 			allLines = lastVersion.getLines();
 			lineAt = lastVersion.getLineAt(lineNum);
@@ -237,8 +236,8 @@ class Document extends Entity{
 	// PURPOSE: prints the most recent version of the document if it exists.
 	// -----------------------------------------------------------------------------------------
 	public void print(){
-		System.out.println("----------");
-		System.out.println(title);
+		System.out.println("*************************************************");
+		System.out.println(title+"\n");
 	
 	//	if at least one version exsits then call the version's print method
 		if(lastVersion != null){
