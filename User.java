@@ -1,13 +1,13 @@
-public class Users extends Entity{
+public class User extends Entity{
 
 	private String username; // for now
-	private List createdDocs;
+	private List createdDocs; // may not need this
 	private String commands; 
 	private int time;
 	// -----------------------------------------------------------------------------------------
 	// Void contructor
 	// -----------------------------------------------------------------------------------------
-	public Users(){
+	public User(){
 			username = null; 
 			commands = "";
 			time = -1;
@@ -17,12 +17,12 @@ public class Users extends Entity{
 	// -----------------------------------------------------------------------------------------
 	// Contructor
 	// -----------------------------------------------------------------------------------------
-	public Users(String username, int time){
+	public User(String username, int time){
 			this.username = username; 
 			this.time = time;
 			commands="";
 			createdDocs = new List();
-			System.out.println("CONFIRMED");
+			System.out.println("CONFIRMED. User \'"+username+"\' has been created.");
 			addCommand("t"+time+": CREATE "+username);
 	}
 
@@ -31,8 +31,9 @@ public class Users extends Entity{
 		this.commands+="\n";	
 	}
 
+	// may not need this
 	public void addCreatedDocs(Document doc){
-		createdDocs.addLast(doc);
+		createdDocs.add(doc);
 	}
 
 	public String getUserId(){
@@ -46,7 +47,7 @@ public class Users extends Entity{
 	// -----------------------------------------------------------------------------------------
 	public void print(){
 		System.out.println("*************************************************");	
-		System.out.println("USER REPORT FOR "+username.toUpperCase());
+		System.out.println("USER REPORT FOR "+username);
 		System.out.println("time: command. (document version)");
 		System.out.println("----------");
 		System.out.print(commands);
