@@ -11,7 +11,6 @@
 // structured.
 //-------------------------------------------------------------------------------
 import java.util.Scanner;
-import java.io.*;
 
 class Main {
 
@@ -26,6 +25,8 @@ class Main {
 		// will actually ask for file name and then call a method called read file
 		reader.readFile(fileName);		
 		
+		input.close();
+
 		System.out.print("\nend of processing.");
 	}
 }

@@ -86,9 +86,15 @@ public class Wiki{
 		User user = handleUser(userid); // check if the user exists and adds the command to user history if it does
 		Document doc = handleDocument(docTitle); // checks if the document exists, prints not found if it doesn't 
 
-		if(user != null && doc!=null && doc.totalVersions() > 0){
-			// user and document exists and there is at least one version of this document
-			doc.replaceLine(lineNum, replacementLine, user, time);			
+		if(user != null && doc!=null){
+			if(doc.totalVersions() > 0){
+				// user and document exists and there is at least one version of this document
+				doc.replaceLine(lineNum, replacementLine, user, time);			
+			} else {
+				// there are no lines in this document.
+				System.out.println("FAIL. There are no lines in \'"+docTitle+"\". Can't replace line "+lineNum+".");
+			}
+
 		}
     } // replace
 
@@ -97,10 +103,15 @@ public class Wiki{
 		User user = handleUser(userid); // check if the user exists and adds the command to user history if it does
 		Document doc = handleDocument(docTitle); // checks if the document exists, prints not found if it doesn't
 
-		if(user != null && doc!=null && doc.totalVersions() > 0){
+		if(user != null && doc!=null){
+			if(doc.totalVersions() > 0){
 			// user and document exists and there is at least one version of this document
-			doc.deleteLine(lineNum, user, time);			
-		}
+			doc.deleteLine(lineNum, user, time);
+			} else {
+				// there are no lines in this document.
+				System.out.println("FAIL. There are no lines in \'"+docTitle+"\" to delete.");
+			}		
+		} 
 
     } // delete
 
@@ -294,7 +305,7 @@ public class Wiki{
 		Node foundAt = null;
 		boolean found = false;
 
-		while(curr != null && !false){
+		while(curr != null && !found){
 			
 			if (curr.isDuplicate(name)){
 				foundAt = curr; 

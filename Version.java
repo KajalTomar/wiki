@@ -95,7 +95,7 @@ class Version extends Entity{
 		Node foundLine = null;
 		boolean found = false;
 
-		while(curr != null && !false){
+		while(curr != null && !found){
 			
 			Line line = (Line)curr.getData();
 
@@ -105,10 +105,6 @@ class Version extends Entity{
 			}
 
 			curr = curr.getNext();
-		}
-
-		if (!found){
-			System.out.println("NOT FOUND");
 		}
 
 		return foundLine;

@@ -5,7 +5,6 @@ class Document extends Entity{
 	private Version lastVersion;
 	private User createdBy; 
 	private String edits;
-	private int time;
 	
 	// -----------------------------------------------------------------------------------------
 	// void contructor
@@ -16,7 +15,6 @@ class Document extends Entity{
 		lastVersion = null;
 		createdBy = null;
 		edits = "";
-		time = -1;
 		// lastVersion = new Version(); do i need this?
 	}
 
@@ -26,7 +24,6 @@ class Document extends Entity{
 	public Document(String title, User user, int time){
 		this.title = title;
 		this.createdBy = user;
-		this.time = time;
 
 		versions = new List();
 		lastVersion = null;
@@ -86,9 +83,7 @@ class Document extends Entity{
 				if (lastVersion.getTime() <= time){
 					found = true;
 					foundAt = curr;
-				} else {
-					System.out.println("NOT FOUND");
-				}
+				} 
 
 			} else {
 				// there are more than one versions
@@ -157,10 +152,11 @@ class Document extends Entity{
 		lastVersion = newVersion; // update last version to the latest one
 		versions.add(newVersion); // add new version to the list of all versions
 
+		System.out.println("SUCCESS. "+user.getUserId()+" has successfully contributed a line to \""+title+"\"");
+
 		addEdit("t"+atTime+": "+user.getUserId()+" appended +++\""+line+"\" "); // add to the history of the document
 
 		user.addCommand("t"+atTime+": APPEND \""+title+"\" \""+line+"\".");
-		System.out.println("SUCCESS. You have successfully contributed a line to \""+title+"\"");
 	
 	} // append
 
@@ -182,16 +178,12 @@ class Document extends Entity{
 				line = (Line)lastVersion.getLineAt(lineNum).getData();
 				oldLine = line.getLine();
 
-				if(line != null){
-					line.setLine(replacementLine);
-					System.out.println("SUCCESS. Line "+lineNum+" has been replaced.");
+				line.setLine(replacementLine);
+				System.out.println("SUCCESS. "+user.getUserId()+" replaced line "+lineNum+" in \""+title+"\".");
 
-					addEdit("t"+atTime+": "+user.getUserId()+" replaced line "+lineNum+" \""+oldLine+"\" ---> \""+replacementLine+"\""); // add to the history of the document
+				addEdit("t"+atTime+": "+user.getUserId()+" replaced line "+lineNum+" \""+oldLine+"\" ---> \""+replacementLine+"\""); // add to the history of the document
 
-					user.addCommand("t"+atTime+": REPLACE \""+title+"\" "+lineNum+" \""+replacementLine+"\".");
-				} else {
-					System.out.println("FAIL. Line number "+lineNum+" does not exist.");
-				}
+				user.addCommand("t"+atTime+": REPLACE \""+title+"\" "+lineNum+" \""+replacementLine+"\".");
 
 			} else {
 				// there is no line number lineNum
@@ -217,7 +209,7 @@ class Document extends Entity{
 				lastVersion.decLineNumbers(lineAt);
 				allLines.delete(lineAt);
 				
-				System.out.println("SUCCESS. Line "+lineNum+" has been deleted.");
+				System.out.println("SUCCESS. "+user.getUserId()+" deleted line "+lineNum+".");
 				addEdit("t"+atTime+": "+user.getUserId()+" deleted line "+lineNum+" ---\""+oldLineContent+"\""); // add to the history of the document
 
 				user.addCommand("t"+atTime+": DELETE \""+title+"\" "+lineNum+".");

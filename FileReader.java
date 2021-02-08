@@ -31,13 +31,13 @@ public class FileReader{
 
       		while (myReader.hasNextLine() && !quit) {
         		String line = myReader.nextLine();
-
+				line = line.replaceFirst("^\\s*", ""); // take out whitespace from the start of the command
 				if (line.equals("QUIT")){
 					quit();
 					quit = true;
 				} else if(line.charAt(0)!='#'){
 					// only if the line isn't a comment or the quit command
-
+					
 					i = line.indexOf(' ');
 					command = line.substring(0,i);
 					line = line.substring(i);
@@ -114,6 +114,13 @@ public class FileReader{
 			i++;
 		}
 
+		// System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^");		
+		// System.out.println("APPEND = "+command);		
+		// System.out.println("TITLE = "+title);
+		// System.out.println("USER = "+userid);
+		// System.out.println("CONTENT = "+content);
+		// System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^");
+
 		wiki1.append(title,userid,content);
 	}
 
@@ -129,6 +136,14 @@ public class FileReader{
 			content+= line[i] + " ";
 			i++;
 		}
+
+	    // System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^");		
+		// System.out.println("COMMAND = "+command);		
+		// System.out.println("TITLE = "+title);
+		// System.out.println("USER = "+userid);
+		// System.out.println("LINE NUMBER = "+lineNumber);
+		// System.out.println("CONTENT = "+content);
+		// System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^");
 
 		wiki1.replace(title,userid,lineNumber,content);
 	}
