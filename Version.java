@@ -3,11 +3,13 @@ class Version extends Entity{
 	private int versionNumber;
 	private List listOfLines;
 	private int totalLines; 
-	
+	private int time;
+
 	// -----------------------------------------------------------------------------------------
 	// void constructor
 	// -----------------------------------------------------------------------------------------
-	public Version(){
+	public Version(int time){
+		this.time = time;
 		versionNumber = 1;
 		totalLines = 0;
 		listOfLines = new List();
@@ -16,7 +18,8 @@ class Version extends Entity{
 	// -----------------------------------------------------------------------------------------
 	// contructor
 	// -----------------------------------------------------------------------------------------
-	public Version(Version lastVersion, int versionNumber){
+	public Version(Version lastVersion, int versionNumber, int time){
+		this.time = time;
 		this.versionNumber = versionNumber+1;
 		totalLines = lastVersion.getTotalLines();
 		List newList = new List(); // create instance of List
@@ -34,13 +37,13 @@ class Version extends Entity{
 	// PURPOSE: creates a new list that is a clone of the this current list.
 	// OUTPUT: Returns a clones List 
 	// -----------------------------------------------------------------------------------------
-	public List versionClone(List listofLines){
+	private List versionClone(List listofLines){
 		List copiedLines = new List();
 		Node curr = listofLines.getFirstItem();
 
 		while(curr != null){
 			Line temp = new Line((Line) curr.getData());
-			copiedLines.addLast(temp);
+			copiedLines.add(temp);
 			curr = curr.getNext();
 		}
 
@@ -49,6 +52,10 @@ class Version extends Entity{
 
 	public int getVersionNumber(){
 		return versionNumber;
+	}
+
+	public int getTime(){
+		return time;
 	}
 
 	// -----------------------------------------------------------------------------------------
@@ -80,7 +87,7 @@ class Version extends Entity{
 		totalLines++;
 
 		Line line = new Line(addLine, totalLines-1); // create a new line object with input 
-		listOfLines.addLast(line); // add this new line object to the list of lines so far
+		listOfLines.add(line); // add this new line object to the list of lines so far
 	} // append
 
 	public Node getLineAt(int lineNumber){
@@ -107,13 +114,26 @@ class Version extends Entity{
 		return foundLine;
 	}
 
+	public void decLineNumbers(Node linesAfter){
+		Node curr = linesAfter.getNext();
+		Line line = null;
+		int lineNum; 
+
+		while(curr!= null){
+			line = (Line)curr.getData();
+			lineNum = line.getLineNumber();
+			line.setLineNum(lineNum-1);
+
+			curr = curr.getNext();
+		}
+	}
+
 	// -----------------------------------------------------------------------------------------
 	// print
 	//
 	// PURPOSE: print this version of the document.
 	// -----------------------------------------------------------------------------------------
 	public void print(){
-			//System.out.println("VERSION: "+versionNumber);
 			listOfLines.print();	
 	} // print
 

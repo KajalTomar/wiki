@@ -14,6 +14,14 @@ public class List{
 		tail = null;
 		total = 0;
 	}
+		
+	public Node getFirstItem(){
+		return head;
+	}
+
+	public Node getLastItem(){
+		return tail;
+	}
 
 	// //-----------------------------------------------------------------------------------------
 	// // addFront
@@ -27,12 +35,12 @@ public class List{
 	// } // addFront
 
 	// -----------------------------------------------------------------------------------------
-	// addLast
+	// add
 	//
 	// PURPOSE: adds data of type Entity to the end of the list.
 	// INPUT: Entity type 
 	// -----------------------------------------------------------------------------------------
-	public void addLast(Entity data){
+	public void add(Entity data){
 		Node newNode; 
 
 		if(head == null){
@@ -46,14 +54,50 @@ public class List{
 		}
 
 		total++;
-	} // addLast
+	} // add
 
-	public Node getFirstItem(){
-		return head;
-	}
+	public void delete(Node deleteMe){
 
-	public Node getLastItem(){
-		return tail;
+		Node prev = null;
+		Node next = null;
+
+		if(deleteMe != null){
+			if(deleteMe == head){
+				// if deleteMe is the first item 
+
+				if(head.getNext() == null){	
+					// if deleteMe is the only item		
+					head = null;
+					tail = null;
+				} else {
+					next = head.getNext();
+					head = next;
+					next.setPrev(null);	
+				}
+
+			} else if (deleteMe == tail){
+				// if deleteMe is that last node on the list 
+
+				prev = deleteMe.getPrev();
+				
+				tail = prev;
+				prev.setNext(null);
+			} else {
+				// deleteMe is somewhere in the middle
+				prev = deleteMe.getPrev();
+				next = deleteMe.getNext();
+
+				prev.setNext(next);
+				next.setPrev(prev);
+			}
+
+			deleteMe.setNext(null);
+			deleteMe.setPrev(null);
+			deleteMe = null;
+
+			total--;
+		}
+
 	}
 
 	//-----------------------------------------------------------------------------------------
