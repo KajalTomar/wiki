@@ -73,21 +73,27 @@ public class FileReader{
 							break;
 					}
 				}
-      		}
+			  }
 
-      		myReader.close();
+      			myReader.close();
+
+			  	if(!quit){
+				System.out.println("MISSING QUIT COMMAND. \nTERMINATING PROGRAM.");
+				quit = true;
+			}
+
     	} catch (FileNotFoundException e) {
       		System.out.println("That file does not exist.");
     	}
 		
 	}
 
-	public void user(String command, String userid){
+	private void user(String command, String userid){
 		userid = userid.replaceAll("\\s+","");
 		wiki1.user(userid);
 	}
 
-	public void create(String command, String restOfLine){
+	private void create(String command, String restOfLine){
 		String[] line = restOfLine.split("\\s+");
 		String title = line[1];
 		String userid = line[2];
@@ -96,7 +102,7 @@ public class FileReader{
 		
 	}	
 
-	public void append(String command, String restOfLine){
+	private void append(String command, String restOfLine){
 		String[] line = restOfLine.split("\\s+");
 		String title = line[1];
 		String userid = line[2];
@@ -111,7 +117,7 @@ public class FileReader{
 		wiki1.append(title,userid,content);
 	}
 
-	public void replace(String command, String restOfLine){
+	private void replace(String command, String restOfLine){
 		String[] line = restOfLine.split("\\s+");
 		String title = line[1];
 		String userid = line[2];
@@ -127,7 +133,7 @@ public class FileReader{
 		wiki1.replace(title,userid,lineNumber,content);
 	}
 
-	public void delete(String command, String restOfLine){
+	private void delete(String command, String restOfLine){
 		String[] line = restOfLine.split("\\s+");
 		String title = line[1];
 		String userid = line[2];
@@ -136,12 +142,12 @@ public class FileReader{
 		wiki1.delete(title,userid,lineNumber);
 	}	
 
-	public void print(String command, String docTitle){
+	private void print(String command, String docTitle){
 		docTitle = docTitle.replaceAll("\\s+","");
 		wiki1.print(docTitle);
 	}
 
-	public void restore(String command, String restOfLine){
+	private void restore(String command, String restOfLine){
 		String[] line = restOfLine.split("\\s+");
 		String userid = line[1];
 		String title = line[2];
@@ -150,17 +156,17 @@ public class FileReader{
 		wiki1.restore(userid,title,time);
 	}
 
-	public void history(String command, String docTitle){
+	private void history(String command, String docTitle){
 		docTitle = docTitle.replaceAll("\\s+","");
 		wiki1.history(docTitle);
 	}
 
-	public void userreport(String command, String userid){
+	private void userreport(String command, String userid){
 		userid = userid.replaceAll("\\s+","");
 		wiki1.userReport(userid);
 	}
 
-	public void quit(){
+	private void quit(){
 		wiki1.quit();
 	}
 }
