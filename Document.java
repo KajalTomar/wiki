@@ -32,7 +32,6 @@ class Document extends Entity{
 		addEdit("t"+time+": "+user.getUserId()+" created new document \"" + title +"\""); // add to the history of the document
 		
 		// update user
-		user.addCreatedDocs(this); // may not need this
 		user.addCommand("t" +time+ " CREATE \"" + title +"\".");
 		System.out.println("CONFIRMED. "+user.getUserId()+" just created a new document called \""+title+"\"!");
 		// lastVersion = new Version(); do i need this?
@@ -46,13 +45,14 @@ class Document extends Entity{
 		return createdBy;
 	}
 
+	public String getTitle(){
+		return title;
+	}
+
 	public void restoreToTime(int time, int newTime, User user){
-		Node restorePoint = getVersionAtTime(time);
-		Version restoreToThis = null;
+		Version restoreToThis =  getVersionAtTime(time);
 
-		if(restorePoint != null){
-			restoreToThis = (Version) restorePoint.getData();
-
+		if(restoreToThis != null){
 			copyVersion(restoreToThis, newTime);
 
 			addEdit("t"+newTime+": "+user.getUserId()+" restored to t"+time); // add to the history of the document
@@ -65,57 +65,51 @@ class Document extends Entity{
 		}
 	}
 
-	public Node getVersionAtTime(int time){
+	public Version getVersionAtTime(int time){
 		boolean found = false;
-		Node foundAt = null;
-		Node curr = versions.getFirstItem();
-		Node prev = null;
-
-		Version prevVersion = null;
-		Version currVersion = null;
-
+		Version foundVersion = null;
+		Version previous = null;
+		Version current = (Version) versions.getFirstItem();
+		
 		if(totalVersions() > 0){
 			// at least one version exists
 
-			if((Version)curr.getData() == lastVersion && curr.getNext() == null){
+			if(current == lastVersion && versions.getNextItem((Entity) current) == null){
 				// there is only one version
 
 				if (lastVersion.getTime() <= time){
 					found = true;
-					foundAt = curr;
+					foundVersion = current;
 				} 
 
 			} else {
 				// there are more than one versions
 
-				while(curr.getNext()!=null && !found){
+				while(versions.getNextItem((Entity)current)!=null && !found){
 					// check the all versions or until we find one with the correct time
 
-					prev = curr;
-					curr = curr.getNext();
+					previous = current;
+					current = (Version) versions.getNextItem((Entity)current);
 
-					prevVersion = (Version) prev.getData();
-					currVersion = (Version) curr.getData();
 
-					if(currVersion.getTime() == time){
+					if(current.getTime() == time){
 						// this is the time we are looking for 
 
 						found = true;
-						foundAt = curr;
-					} else if (currVersion.getTime() > time && prevVersion.getTime() <= time){
+						foundVersion = current;
+					} else if (current.getTime() > time && previous.getTime() <= time){
 						// the current version was created at a time late than what we are seeking 
 						// and previous version's time is less than what we are seeking
 
 						found = true;
-						foundAt = prev;
+						foundVersion = previous;
 					}
 				}
 			}
-			
 		}
 
-		return foundAt;
-	
+		return foundVersion;
+
 	}
 
 	public int totalVersions(){
@@ -175,7 +169,7 @@ class Document extends Entity{
 				// lineNumber is valid
 				
 				copyVersion(lastVersion,atTime); // this creates a new version that is identical to the current version
-				line = (Line)lastVersion.getLineAt(lineNum).getData();
+				line = lastVersion.getLineAt(lineNum);
 				oldLine = line.getLine();
 
 				line.setLine(replacementLine);
@@ -193,21 +187,19 @@ class Document extends Entity{
 
 	public void deleteLine(int lineNum, User user, int atTime){
 		List allLines = null;
-		Node lineAt = null; 
-		Line oldLine = null; 
+		Line deleteLine = null;  // lineAt == 
 		String oldLineContent; 
 
 		if(lineNum < lastVersion.getTotalLines() && lineNum >= 0){
 			copyVersion(lastVersion, atTime); // this creates a new version that is identical to the current version
 			allLines = lastVersion.getLines();
-			lineAt = lastVersion.getLineAt(lineNum);
+			deleteLine = lastVersion.getLineAt(lineNum);
 
-			if(lineAt != null){
-				oldLine = (Line) lineAt.getData();
-				oldLineContent = oldLine.getLine();
+			if(deleteLine != null){
+				oldLineContent = deleteLine.getLine();
 				
-				lastVersion.decLineNumbers(lineAt);
-				allLines.delete(lineAt);
+				lastVersion.decLineNumbers(deleteLine);
+				allLines.delete(deleteLine);
 				
 				System.out.println("SUCCESS. "+user.getUserId()+" deleted line "+lineNum+".");
 				addEdit("t"+atTime+": "+user.getUserId()+" deleted line "+lineNum+" ---\""+oldLineContent+"\""); // add to the history of the document

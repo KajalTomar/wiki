@@ -1,7 +1,6 @@
 public class User extends Entity{
 
 	private String username; // for now
-	private List createdDocs; // may not need this
 	private String commands; 
 	// -----------------------------------------------------------------------------------------
 	// Void contructor
@@ -9,7 +8,6 @@ public class User extends Entity{
 	public User(){
 			username = null; 
 			commands = "";
-			createdDocs = new List();
 	}
 
 	// -----------------------------------------------------------------------------------------
@@ -18,7 +16,6 @@ public class User extends Entity{
 	public User(String username, int time){
 			this.username = username; 
 			commands="";
-			createdDocs = new List();
 			System.out.println("CONFIRMED. User \'"+username+"\' has been created.");
 			addCommand("t"+time+": CREATE "+username);
 	}
@@ -26,11 +23,6 @@ public class User extends Entity{
 	public void addCommand(String command){
 		this.commands+= command;
 		this.commands+="\n";	
-	}
-
-	// may not need this
-	public void addCreatedDocs(Document doc){
-		createdDocs.add(doc);
 	}
 
 	public String getUserId(){

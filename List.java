@@ -13,31 +13,58 @@ public class List{
 		total = 0;
 	}
 		
-	public Node getFirstItem(){
-		return head;
+	public Entity getFirstItem(){
+		Entity firstItem = null;
+
+		if(head != null){
+			firstItem = head.getData();
+		}
+
+		return firstItem;
 	}
 
-	public Node getLastItem(){
-		return tail;
+	public Entity getLastItem(){
+		Entity lastItem = null;
+
+		if(tail != null){
+			lastItem = tail.getData();
+		}
+
+		return lastItem;
+	}
+	
+
+	public Entity getNextItem(Entity item){
+		Node foundAt = null;
+		Entity entity = null;
+
+		foundAt = search(item);
+
+		if(foundAt.getNext() != null){
+			entity = foundAt.getNext().getData();
+		}
+
+		return entity;
 	}
 
-	// //-----------------------------------------------------------------------------------------
-	// // addFront
-	// //
-	// // PURPOSE: adds data of type Entity to the front of the list.
-	// // INPUT: Entity type 
-	// // -----------------------------------------------------------------------------------------
-	// public void addFront(Entity data){
-	// 	head = new Node(data, head); 
-	// 	total++;
-	// } // addFront
+	private Node search(Entity item){
+		Node curr = head;
+		Node foundNode = null;
+		boolean found = false;
 
-	// -----------------------------------------------------------------------------------------
-	// add
-	//
-	// PURPOSE: adds data of type Entity to the end of the list.
-	// INPUT: Entity type 
-	// -----------------------------------------------------------------------------------------
+		while(curr != null && !found){
+
+			if(curr.getData() == item){
+				foundNode = curr;
+				found = true;
+			}
+				curr = curr.getNext();
+		}
+
+		return foundNode;
+	}
+
+
 	public void add(Entity data){
 		Node newNode; 
 
@@ -54,8 +81,8 @@ public class List{
 		total++;
 	} // add
 
-	public void delete(Node deleteMe){
-
+	public void delete(Entity deleteEntity){
+		Node deleteMe = search(deleteEntity);
 		Node prev = null;
 		Node next = null;
 
@@ -97,6 +124,7 @@ public class List{
 		}
 
 	}
+
 
 	//-----------------------------------------------------------------------------------------
 	// Print

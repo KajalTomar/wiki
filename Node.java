@@ -83,17 +83,6 @@ public class Node{
 	} // setPrev
 
 	// -----------------------------------------------------------------------------------------
-	// isDuplicate
-	//
-	// PURPOSE: calls Entity's isDuplicate method to check if it matches the input key (String).
-	// INPUT: some String
-	// OUTPUT: result from Entity's isDuplicate method (boolean)
-	// -----------------------------------------------------------------------------------------
-	public boolean isDuplicate(String name){
-		return data.isDuplicate(name);
-	} // isDuplicate
-
-	// -----------------------------------------------------------------------------------------
 	// print
 	//
 	// PURPOSE: prints the entire list starting from the first item.

@@ -100,6 +100,13 @@ public class FileReader{
 
 		wiki1.create(title,userid);
 		
+		
+		// System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^");		
+		// System.out.println("COMMAND = "+command);		
+		// System.out.println("TITLE = "+title);
+		// System.out.println("USER = "+userid);
+		// System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^");
+		
 	}	
 
 	private void append(String command, String restOfLine){

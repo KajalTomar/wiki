@@ -22,7 +22,6 @@ class Version extends Entity{
 		this.time = time;
 		this.versionNumber = versionNumber+1;
 		totalLines = lastVersion.getTotalLines();
-		List newList = new List(); // create instance of List
 		// if a previous version of the document exists
 		if(lastVersion!=null){
 			// copy all the lines of the previous version to the current version
@@ -39,12 +38,12 @@ class Version extends Entity{
 	// -----------------------------------------------------------------------------------------
 	private List versionClone(List listofLines){
 		List copiedLines = new List();
-		Node curr = listofLines.getFirstItem();
+		Line current = (Line) listofLines.getFirstItem();
 
-		while(curr != null){
-			Line temp = new Line((Line) curr.getData());
+		while(current != null){
+			Line temp = new Line(current);
 			copiedLines.add(temp);
-			curr = curr.getNext();
+			current = (Line) listofLines.getNextItem((Entity) current);
 		}
 
 		return copiedLines;
@@ -90,37 +89,36 @@ class Version extends Entity{
 		listOfLines.add(line); // add this new line object to the list of lines so far
 	} // append
 
-	public Node getLineAt(int lineNumber){
-		Node curr = listOfLines.getFirstItem();
-		Node foundLine = null;
+	public Line getLineAt(int lineNumber){
+		Line current = (Line) listOfLines.getFirstItem();
+		Line foundLine = null;
 		boolean found = false;
 
-		while(curr != null && !found){
+		while(current != null && !found){
 			
-			Line line = (Line)curr.getData();
+			// line == current
 
-			if (line.getLineNumber() == lineNumber){
-				foundLine = curr; 
+			if (current.getLineNumber() == lineNumber){
+				foundLine = current; 
 				found = true;
 			}
 
-			curr = curr.getNext();
+			current = (Line) listOfLines.getNextItem((Entity) current);
 		}
 
 		return foundLine;
 	}
 
-	public void decLineNumbers(Node linesAfter){
-		Node curr = linesAfter.getNext();
-		Line line = null;
+	public void decLineNumbers(Line linesAfter){
+		Line curr = (Line) listOfLines.getNextItem((Entity) linesAfter);
 		int lineNum; 
 
+		// line == curr
 		while(curr!= null){
-			line = (Line)curr.getData();
-			lineNum = line.getLineNumber();
-			line.setLineNum(lineNum-1);
+			lineNum = curr.getLineNumber();
+			curr.setLineNum(lineNum-1);
 
-			curr = curr.getNext();
+			curr = (Line) listOfLines.getNextItem((Entity) curr);
 		}
 	}
 

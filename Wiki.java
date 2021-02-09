@@ -23,7 +23,7 @@ public class Wiki{
 	// -----------------------------------------------------------------------------------------
 	public void user(String userid) {  
 		time++;
-
+		
 		if (duplicateUser(userid)){
 			// if the userid is already taken
 			System.out.println("DUPLICATE. user \'"+userid+"\' already exists.");
@@ -196,64 +196,67 @@ public class Wiki{
 		System.out.print("\n********\nBYE\n");
 	}
 
-	
-
-	// -----------------------------------------------------------------------------------------
-	// retrieve
-	//
-	// PURPOSE: Returns an entity type (user, document) based on a key (document name, username)
-	// INPUT: username, document title (String)
-	// OUTPUT: On success it returns an Entity. On failure it returns null and prints 'not found'.
-	// -----------------------------------------------------------------------------------------
-	private Entity retrieve(List list, String name){
-		Node dataAtNode = searchByName(list, name); 
-		Entity data = null;
-
-		if(dataAtNode != null){
-			data = dataAtNode.getData();
-		} 
-
-		return data;
-
-	} // retrieve
 
 	private Document retrieveDocument(String docTitle){
-		return (Document) retrieve(documents, docTitle);
+		Document current = (Document) documents.getFirstItem();
+		Document foundDoc = null;
+		boolean found = false;
+
+		while(current != null && !found){
+
+			if(current.isDuplicate(docTitle)){
+				foundDoc = current;
+				found = true;
+			}
+
+			current = (Document) documents.getNextItem((Entity) current);
+		}
+		return foundDoc;
 	}
 
 	private User retrieveUser(String userid){
-		return (User) retrieve(userList, userid);
+		User current = (User) userList.getFirstItem();
+		User foundUser = null;
+		boolean found = false;
+
+		while(current != null && !found){
+
+			if(current.isDuplicate(userid)){
+
+				foundUser = current;
+				found = true;
+			}
+
+			if (userList.getNextItem((Entity) current) != null){
+				current = (User) userList.getNextItem((Entity) current);
+			} else {
+				current = null;
+			}
+			
+		}
+		
+		return foundUser;
 	}
 
-	// private Node getLineN(Document doc, int lineNum){
-
-    //     Version version = (Version) doc.getAllVerions().getLastItem().getData();
-    //     Node lineAt = null; 
-        
-    //     if(version != null){
-    //         lineAt = version.getLineAt(lineNum);
-    //     }
-
-    //     return lineAt;
-    // }  
-
-    // -----------------------------------------------------------------------------------------
-	// isDuplicate
-	//
-	// PURPOSE: checks is an Entity with input key (String) already exists on the list.
-	// INPUT: username, document title (String)
-	// OUTPUT: Returns true if an Entity with the same key exists on the list, returns false
-	// otherwise. Prints the result.
-	// -----------------------------------------------------------------------------------------
-	private boolean isDuplicate(List list, String name){
+	private boolean duplicateUser(String userid){
 		boolean duplicate = false;
 
-		if(searchByName(list, name)!=null){
+		if(retrieveUser(userid)!=null){
+			duplicate = true;
+		} 
+
+		return duplicate;  
+	}
+
+	private boolean duplicateDocument(String title){
+		boolean duplicate = false;
+
+		if(retrieveDocument(title)!=null){
 			duplicate = true;
 		} 
 
 		return duplicate; 
-	} // isDuplicate
+	}
 
 	private User handleUser(String userid){
 		User user = null;
@@ -283,41 +286,7 @@ public class Wiki{
 		return doc;
 	}
 
-	private boolean duplicateUser(String userid){
-		return isDuplicate(userList, userid);	 
-	}
 
-	private boolean duplicateDocument(String title){
-		return isDuplicate(documents, title);
-	}
-
-    // -----------------------------------------------------------------------------------------
-	// searchByName
-	//
-	// PURPOSE: searchByNamees for an entity type (user, document) based on a key (document name, 
-	// username)
-	// INPUT: username, document title (String)
-	// OUTPUT: On success it returns the node corresponding to the Entity. On failure it returns 
-	// null.
-	// -----------------------------------------------------------------------------------------
-	private Node searchByName(List list, String name){
-		Node curr = list.getFirstItem(); 
-		Node foundAt = null;
-		boolean found = false;
-
-		while(curr != null && !found){
-			
-			if (curr.isDuplicate(name)){
-				foundAt = curr; 
-				found = true;
-			}
-
-			curr = curr.getNext();
-		}
-
-		return foundAt;
-	} // searchByNameByName
-  
 
 	private int characterLength(String line){
 		String tempLine = line; 
