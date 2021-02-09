@@ -43,7 +43,7 @@ public class testList {
         afterTotal = list.getTotal();
 
         // System.out.println("Testing getTotal when there is a single item on the list");
-        assertEquals(beforeTotal+1, afterTotal;
+        assertEquals(beforeTotal+1, afterTotal);
         assertEquals(1, afterTotal);
     }
 
