@@ -1,9 +1,10 @@
 //-------------------------------------------------------------------------------
-// NAME: 
-// STUDENT NUMBER: 
-// COURSE: , SECTION: 
-// INSTRUCTOR: 
-// ASSIGNMENT: 
+// NAME		: your name 
+// STUDENT NUMBER	: your student number
+// COURSE		: COMP 2150
+// INSTRUCTOR	: your instructor
+// ASSIGNMENT	: assignment #
+// QUESTION	: question #  
 // 
 // REMARKS: in this assignments we built the tools to manage a wiki using Object 
 // Orientation concepts. Because of this, the assignment is given in terms of

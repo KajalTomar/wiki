@@ -19,6 +19,11 @@ class Line extends Entity{
 		this.line = line;
 	}
 
+	// -----------------------------------------------------------------------------------------
+	// constructor
+	//
+	// PURPOSE: sets the line and line number to input line's line number and line
+	// -----------------------------------------------------------------------------------------
 	public Line(Line copyLine){
 		this.lineNumber = copyLine.getLineNumber();
 		this.line = copyLine.getLine();
@@ -26,31 +31,43 @@ class Line extends Entity{
 
 	// -----------------------------------------------------------------------------------------
 	// getLineNumber
-	// -----------------------------------------------------------------------------------------	
+	//
+	// PURPOSE: returns the line number
+	// OUTPUT: lineNumber (int)
+	// -----------------------------------------------------------------------------------------
 	public int getLineNumber(){
 		return lineNumber;
-	}
+	} // getLineNumber
 
 	// -----------------------------------------------------------------------------------------
 	// getLine
+	//
+	// PURPOSE: returs the line 
+	// OUTPUT: line (String)
 	// -----------------------------------------------------------------------------------------	
 	public String getLine(){
 		return line;
-	}
+	} // getLine
 
 	// -----------------------------------------------------------------------------------------
 	// setLine
+	//
+	// PURPOSE: sets line to the input line
+	// INPUT: line (String)
 	// -----------------------------------------------------------------------------------------	
 	public void setLine(String line){
 		this.line = line;
-	}
+	} // setLine
 
 	// -----------------------------------------------------------------------------------------
-	// set Line Number
-	// -----------------------------------------------------------------------------------------	
+	// setLineNum
+	//
+	// PURPOSE: sets the line number to the input line number
+	// INPUT: lineNumber (int)
+	// -----------------------------------------------------------------------------------------
 	public void setLineNum(int lineNumber){
 		this.lineNumber = lineNumber;
-	}
+	} // setLineNum
 
 	// -----------------------------------------------------------------------------------------
 	// print

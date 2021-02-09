@@ -1,7 +1,8 @@
 public class User extends Entity{
 
-	private String username; // for now
+	private String username; 
 	private String commands; 
+
 	// -----------------------------------------------------------------------------------------
 	// Void contructor
 	// -----------------------------------------------------------------------------------------
@@ -20,14 +21,26 @@ public class User extends Entity{
 			addCommand("t"+time+": CREATE "+username);
 	}
 
+	// -----------------------------------------------------------------------------------------
+	// addCommand
+	//
+	// PURPOSE: adds the command to string of commands
+	// INPUT: command (String)
+	// -----------------------------------------------------------------------------------------
 	public void addCommand(String command){
 		this.commands+= command;
 		this.commands+="\n";	
-	}
+	} // addCommand
 
+	// -----------------------------------------------------------------------------------------
+	// getUserId
+	//
+	// PURPOSE: returs the userid
+	// OUTPUT: username (String)
+	// -----------------------------------------------------------------------------------------
 	public String getUserId(){
 		return username;
-	}
+	} // getUserId
 
 	// -----------------------------------------------------------------------------------------
 	// print

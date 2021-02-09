@@ -1,0 +1,139 @@
+Input file name: a1_test_data.txt
+CONFIRMED. User 'mike' has been created.
+CONFIRMED. mike just created a new document called "Object_Oriented_Programming"!
+CONFIRMED. mike just created a new document called "Operating_System"!
+NOT FOUND. User "ali" does not exist.
+SUCCESS. mike has successfully contributed a line to "Object_Oriented_Programming"
+NOT FOUND. User "ali" does not exist.
+NOT FOUND. No document with the title "Graph_Theory" exists :(
+SUCCESS. mike has successfully contributed a line to "Object_Oriented_Programming"
+SUCCESS. mike has successfully contributed a line to "Object_Oriented_Programming"
+NOT FOUND. No document with the title "Graph_Theory" exists :(
+NOT FOUND. No document with the title "Graph_Theory" exists :(
+FAIL. Line number 5 does not exist.
+CONFIRMED. User 'ali' has been created.
+CONFIRMED. ali just created a new document called "Graph_Theory"!
+NOT FOUND. User "john" does not exist.
+NOT FOUND. No document with the title "Human_Computer_Interaction" exists :(
+DUPLICATE. user 'mike' already exists.
+NOT FOUND. User "john" does not exist.
+NOT FOUND. No document with the title "Human_Computer_Interaction" exists :(
+NOT FOUND. This document did not exist or contain content at time 5.
+SUCCESS. mike replaced line 2 in "Object_Oriented_Programming".
+*************************************************
+Graph_Theory
+
+FAIL. There are no lines in 'Graph_Theory". Can't replace line 1.
+SUCCESS. ali has successfully contributed a line to "Graph_Theory"
+NOT FOUND. User "john" does not exist.
+NOT FOUND. No document with the title "History_of_programming_languages" exists :(
+NOT FOUND. User "John" does not exist.
+NOT FOUND. No document with the title "Automata_Theory" exists :(
+DUPLICATE. Sorry mike, a document titled "Object_Oriented_Programming" already exists.
+CONFIRMED. User 'john' has been created.
+NOT FOUND. This document did not exist or contain content at time 15.
+NOT FOUND. No document with the title "Java_Programming_language" exists :(
+NOT FOUND. No document with the title "Graph_Theoryali" exists :(
+DUPLICATE. Sorry ali, a document titled "Graph_Theory" already exists.
+NOT FOUND. No document with the title "Java_Programming_language" exists :(
+FAIL. Line number 1 does not exist.
+SUCCESS. ali deleted line 0.
+FAIL. Line number 0 does not exist.
+SUCCESS. "Graph_Theory" has been restored to time 32.
+SUCCESS. "Object_Oriented_Programming" has been restored to time 18.
+SUCCESS. "Object_Oriented_Programming" has been restored to time 25.
+NOT FOUND. No document with the title "Automata_Theory" exists :(
+*************************************************
+Object_Oriented_Programming
+
+0: OO programming is awesome.
+1: I love OO programing.
+2: Pointers are useful in Cpp
+
+NOT FOUND. No document with the title "Human_Computer_Interaction" exists :(
+*************************************************
+Graph_Theory
+
+0: graph theory is an interesting course
+
+*************************************************
+Operating_System
+
+NOT FOUND. No document with the title "Automata_Theory" exists :(
+*************************************************
+HISTORY FOR OBJECT_ORIENTED_PROGRAMMING
+created by: mike
+t(= time): user's edit
+----------
+t38: mike restored to t25
+t37: mike restored to t18
+t18: mike replaced line 2 "everyone likes pointers in Cpp " ---> "Pointers are useful in Cpp "
+t7: mike appended +++"everyone likes pointers in Cpp "
+t6: mike appended +++"I love OO programing. "
+t4: mike appended +++"OO programming is awesome. "
+t1: mike created new document "Object_Oriented_Programming"
+
+
+NOT FOUND. No document with the title "Human_Computer_Interaction" exists :(
+*************************************************
+HISTORY FOR GRAPH_THEORY
+created by: ali
+t(= time): user's edit
+----------
+t36: ali restored to t32
+t34: ali deleted line 0 ---"graph theory is an interesting course "
+t21: ali appended +++"graph theory is an interesting course "
+t12: ali created new document "Graph_Theory"
+
+
+*************************************************
+HISTORY FOR OPERATING_SYSTEM
+created by: mike
+t(= time): user's edit
+----------
+t2: mike created new document "Operating_System"
+
+
+NOT FOUND. User "andrea" does not exist.
+
+*************************************************
+USER REPORT FOR ali
+time: command. (document version)
+----------
+t11: CREATE ali
+t12 CREATE "Graph_Theory".
+t21: APPEND "Graph_Theory" "graph theory is an interesting course ".
+t34: DELETE "Graph_Theory" 0.
+t36: RESTORE "Graph_Theory" t32.
+
+*************************************************
+USER REPORT FOR mike
+time: command. (document version)
+----------
+t0: CREATE mike
+t1 CREATE "Object_Oriented_Programming".
+t2 CREATE "Operating_System".
+t4: APPEND "Object_Oriented_Programming" "OO programming is awesome. ".
+t6: APPEND "Object_Oriented_Programming" "I love OO programing. ".
+t7: APPEND "Object_Oriented_Programming" "everyone likes pointers in Cpp ".
+t18: REPLACE "Object_Oriented_Programming" 2 "Pointers are useful in Cpp ".
+t37: RESTORE "Object_Oriented_Programming" t18.
+t38: RESTORE "Object_Oriented_Programming" t25.
+
+NOT FOUND. User "mary" does not exist.
+
+*************************************************
+USER REPORT FOR john
+time: command. (document version)
+----------
+t27: CREATE john
+
+CONFIRMED. mike just created a new document called "Discrete_Math"!
+SUCCESS. mike has successfully contributed a line to "Discrete_Math"
+NOT FOUND. User "michael" does not exist.
+FAIL. Line number 1 does not exist.
+
+********
+BYE
+
+end of processing.

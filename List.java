@@ -38,32 +38,18 @@ public class List{
 		Node foundAt = null;
 		Entity entity = null;
 
-		foundAt = search(item);
+		if(item != null){
+			foundAt = search(item);
+		}
 
-		if(foundAt.getNext() != null){
-			entity = foundAt.getNext().getData();
+		if(foundAt != null){
+			if(foundAt.getNext() != null){
+				entity = foundAt.getNext().getData();
+			}
 		}
 
 		return entity;
 	}
-
-	private Node search(Entity item){
-		Node curr = head;
-		Node foundNode = null;
-		boolean found = false;
-
-		while(curr != null && !found){
-
-			if(curr.getData() == item){
-				foundNode = curr;
-				found = true;
-			}
-				curr = curr.getNext();
-		}
-
-		return foundNode;
-	}
-
 
 	public void add(Entity data){
 		Node newNode; 
@@ -149,5 +135,21 @@ public class List{
 		return total;
 	}
 
+	private Node search(Entity item){
+		Node curr = head;
+		Node foundNode = null;
+		boolean found = false;
+
+		while(curr != null && !found){
+
+			if(curr.getData() == item){
+				foundNode = curr;
+				found = true;
+			}
+				curr = curr.getNext();
+		}
+
+		return foundNode;
+	}
 
 } // List
