@@ -16,18 +16,24 @@ import java.util.Scanner;
 class Main {
 
 	public static void main(String args[]){	
+
 		Scanner input = new Scanner(System.in);
 		FileReader reader = new FileReader();
 		String fileName;
 
+		// get the input file
 		System.out.print("Input file name: ");
 		fileName = input.nextLine().trim();
 
-		// will actually ask for file name and then call a method called read file
+		// send the file to readerFile
 		reader.readFile(fileName);		
 		
+		// close scanner
 		input.close();
 
 		System.out.print("\nend of processing.");
+
 	}
-}
+
+} // Main
+

@@ -1,3 +1,15 @@
+//---------------------------------------------------------------------
+// CLASS: Node.java
+//
+// Author: Kajal Tomar, 7793306
+//
+// REMARKS: this is a node class that holds an object of type Entity.
+// It also provides methods to set, access, and print this 
+// information. It also hold information about the previous and next
+//  Node object and allows access to them.
+// 
+//---------------------------------------------------------------------
+
 public class Node{
 	
 	private Entity data;
@@ -26,7 +38,7 @@ public class Node{
 	// getData
 	//
 	// PURPOSE: accessor method
-	// OUTPUT: Returns data (Entity)
+	// RETURNS: data (Entity)
 	// -----------------------------------------------------------------------------------------
 	public Entity getData(){
 		return data;
@@ -36,7 +48,7 @@ public class Node{
 	// getNext
 	//
 	// PURPOSE: accessor method
-	// OUTPUT: Returns next (Node)
+	// RETURNS: next (Node) if it exists or null otherwise.
 	// -----------------------------------------------------------------------------------------
 	public Node getNext(){
 		return next;
@@ -46,7 +58,7 @@ public class Node{
 	// getNextItem
 	//
 	// PURPOSE: accessor method
-	// OUTPUT: Returns next Entity
+	// RETURNS: Returns next the Entity if it exists or null otherwise.
 	// -----------------------------------------------------------------------------------------
 	public Entity getNextItem(){
 		return next.getData();
@@ -56,7 +68,7 @@ public class Node{
 	// getPrev
 	//
 	// PURPOSE: accessor method
-	// OUTPUT: Returns prev (Node)
+	// RETURNS: prev (Node) or null current Node == head
 	// -----------------------------------------------------------------------------------------
 	public Node getPrev(){
 		return prev;
@@ -66,7 +78,7 @@ public class Node{
 	// setNext
 	//
 	// PURPOSE: sets next Node 
-	// INPUT: Node to set 'next' to
+	// PARAMETERS: Node to set 'next' to
 	// -----------------------------------------------------------------------------------------
 	public void setNext(Node next){
 		this.next = next;
@@ -76,7 +88,7 @@ public class Node{
 	// setPrev
 	//
 	// PURPOSE: sets previous Node 
-	// INPUT: Node to set 'prev' node to
+	// PARAMETERS: Node to set 'prev' node to
 	// -----------------------------------------------------------------------------------------
 	public void setPrev(Node prev){
 		this.prev = prev;
@@ -85,7 +97,7 @@ public class Node{
 	// -----------------------------------------------------------------------------------------
 	// print
 	//
-	// PURPOSE: prints the entire list starting from the first item.
+	// PURPOSE: prints the entire list starting from the current node.
 	// -----------------------------------------------------------------------------------------
 	public void print() {
 		

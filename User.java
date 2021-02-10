@@ -1,7 +1,18 @@
+//---------------------------------------------------------------------
+// CLASS: User.java
+//
+// Author: Kajal Tomar, 7793306
+//
+// REMARKS: the purpose of this class is to hold information about a 
+// user. It also provides methods to set, access, and print this 
+// information.
+// 
+//---------------------------------------------------------------------
+
 public class User extends Entity{
 
 	private String username; 
-	private String commands; 
+	private String commands; // will hold all the commands a user makes as a string
 
 	// -----------------------------------------------------------------------------------------
 	// Void contructor
@@ -9,7 +20,8 @@ public class User extends Entity{
 	public User(){
 			username = null; 
 			commands = "";
-	}
+
+	} // User
 
 	// -----------------------------------------------------------------------------------------
 	// Contructor
@@ -17,35 +29,39 @@ public class User extends Entity{
 	public User(String username, int time){
 			this.username = username; 
 			commands="";
+
 			System.out.println("CONFIRMED. User \'"+username+"\' has been created.");
 			addCommand("t"+time+": CREATE "+username);
-	}
+
+	} // User
 
 	// -----------------------------------------------------------------------------------------
 	// addCommand
 	//
 	// PURPOSE: adds the command to string of commands
-	// INPUT: command (String)
+	// PARAMETERS: command (String)
 	// -----------------------------------------------------------------------------------------
 	public void addCommand(String command){
-		this.commands+= command;
+		this.commands+= command; // add to the end of commands
 		this.commands+="\n";	
+
 	} // addCommand
 
 	// -----------------------------------------------------------------------------------------
 	// getUserId
 	//
-	// PURPOSE: returs the userid
-	// OUTPUT: username (String)
+	// PURPOSE: returns the userid
+	// RETURNS: username (String)
 	// -----------------------------------------------------------------------------------------
 	public String getUserId(){
 		return username;
+
 	} // getUserId
 
 	// -----------------------------------------------------------------------------------------
 	// print
 	//
-	// PURPOSE: prints the user's information/
+	// PURPOSE: prints the user's information
 	// -----------------------------------------------------------------------------------------
 	public void print(){
 		System.out.println("*************************************************");	
@@ -60,8 +76,8 @@ public class User extends Entity{
 	// isDuplicate
 	//
 	// PURPOSE: to check if input 'name' matches username
-	// INPUT: name (String)
-	// OUTPUT: returns true if name matches username exactly. Returns false otherwise.
+	// PARAMETERS: name (String) 
+	// RETURNS: true if 'name' matches username exactly. Returns false otherwise. (boolean)
 	// -----------------------------------------------------------------------------------------
 	public boolean isDuplicate(String name){
 		return name.equals(username);

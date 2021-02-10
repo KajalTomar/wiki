@@ -1,3 +1,13 @@
+//---------------------------------------------------------------------
+// CLASS: Line.java
+//
+// Author: Kajal Tomar, 7793306
+//
+// REMARKS: holds a line and a corresponding line number. Has methods
+// to be able to get, set, copy and print these properties. 
+// 
+//---------------------------------------------------------------------
+
 class Line extends Entity{
 
 	private int lineNumber; 
@@ -22,7 +32,8 @@ class Line extends Entity{
 	// -----------------------------------------------------------------------------------------
 	// constructor
 	//
-	// PURPOSE: sets the line and line number to input line's line number and line
+	// PURPOSE: sets the parameter of this to the parameters of copyLine (Line).
+	// PARAMETERS: the line to copy (Line)
 	// -----------------------------------------------------------------------------------------
 	public Line(Line copyLine){
 		this.lineNumber = copyLine.getLineNumber();
@@ -33,7 +44,7 @@ class Line extends Entity{
 	// getLineNumber
 	//
 	// PURPOSE: returns the line number
-	// OUTPUT: lineNumber (int)
+	// RETURNS: lineNumber (int)
 	// -----------------------------------------------------------------------------------------
 	public int getLineNumber(){
 		return lineNumber;
@@ -43,7 +54,7 @@ class Line extends Entity{
 	// getLine
 	//
 	// PURPOSE: returs the line 
-	// OUTPUT: line (String)
+	// RETURNS: line (String)
 	// -----------------------------------------------------------------------------------------	
 	public String getLine(){
 		return line;
@@ -53,7 +64,7 @@ class Line extends Entity{
 	// setLine
 	//
 	// PURPOSE: sets line to the input line
-	// INPUT: line (String)
+	// PARAMETER: line (String)
 	// -----------------------------------------------------------------------------------------	
 	public void setLine(String line){
 		this.line = line;
@@ -63,7 +74,7 @@ class Line extends Entity{
 	// setLineNum
 	//
 	// PURPOSE: sets the line number to the input line number
-	// INPUT: lineNumber (int)
+	// PARAMETER: lineNumber (int)
 	// -----------------------------------------------------------------------------------------
 	public void setLineNum(int lineNumber){
 		this.lineNumber = lineNumber;

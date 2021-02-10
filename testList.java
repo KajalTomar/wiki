@@ -1,7 +1,17 @@
+//--------------------------------------------------------
+// CLASS: Testlist.java
+//
+// Author: Kajal Tomar, 7793306
+//
+// REMARKS: the purpose of this class is to test the 
+// List.java class. 
+// 
+//--------------------------------------------------------
+
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-public class testList {
+public class TestList {
 
     @Test 
     public void testListCreation() {
