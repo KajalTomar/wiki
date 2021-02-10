@@ -17,7 +17,7 @@ class Version extends Entity{
 	private int time;
 
 	// -----------------------------------------------------------------------------------------
-	// void constructor
+	// null constructor
 	// -----------------------------------------------------------------------------------------
 	public Version(int time){
 		this.time = time;

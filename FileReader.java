@@ -15,10 +15,10 @@ import java.util.Scanner; // Import the Scanner class to read text files
 
 public class FileReader{
 	
-	Wiki wiki1;
+	private Wiki wiki1;
 
 	//-----------------------------------------------------------------------------------------
-	// Constructor
+	// null constructor
 	// ----------------------------------------------------------------------------------------
 	public FileReader(){
 		wiki1 = new Wiki();

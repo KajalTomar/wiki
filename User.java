@@ -15,7 +15,7 @@ public class User extends Entity{
 	private String commands; // will hold all the commands a user makes as a string
 
 	// -----------------------------------------------------------------------------------------
-	// Void contructor
+	// null contructor
 	// -----------------------------------------------------------------------------------------
 	public User(){
 			username = null; 

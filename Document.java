@@ -18,7 +18,7 @@ class Document extends Entity{
 	private String edits; // all the edits made on this document
 	
 	// -----------------------------------------------------------------------------------------
-	// void contructor
+	// null contructor
 	// -----------------------------------------------------------------------------------------
 	public Document(){
 		title = null;
