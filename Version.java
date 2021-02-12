@@ -11,10 +11,10 @@
 
 class Version extends Entity{
 
-	private int versionNumber;
-	private List listOfLines;
-	private int totalLines; 
-	private int time;
+	private int versionNumber; // the current version number
+	private List listOfLines; // holds the list of lines that make up the current versiom
+	private int totalLines; // the amount of lines in the current version
+	private int time; // what time this version was created at
 
 	// -----------------------------------------------------------------------------------------
 	// null constructor
@@ -38,6 +38,7 @@ class Version extends Entity{
 		this.time = time;
 		this.versionNumber = versionNumber+1;
 		totalLines = lastVersion.getTotalLines();
+
 		// if a previous version of the document exists
 		if(lastVersion!=null){
 			// copy all the lines of the previous version to the current version
@@ -110,10 +111,11 @@ class Version extends Entity{
 	// returns null otherwise. 
 	// -----------------------------------------------------------------------------------------
 	public Line getLineAt(int lineNumber){
-		Line foundLine = null;
-		boolean found = false;
+		Line foundLine = null; 
+		boolean found = false; 
 		Line current = null; // to iterate through the list of lines
-		Entity result = listOfLines.getFirstItem(); 
+		Entity result = listOfLines.getFirstItem();  // will hold the results of method calls
+													// that return an Entity type
 
 		// safe casting
 		if (result instanceof Line){
@@ -152,7 +154,7 @@ class Version extends Entity{
 	// PARAMETER: line (Line)
 	// -----------------------------------------------------------------------------------------
 	public void decLineNumbers(Line linesAfter){
-		int lineNum; 
+		int lineNum; // will hold the current line number 
 		Line current = null; // to iterate through the list of lines
 		Entity result = listOfLines.getNextItem((Entity) linesAfter);
 
