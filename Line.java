@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------
 // CLASS: Line.java
 //
-// Author: Kajal Tomar, 7793306
+// Author: Kajal Tomar, 
 //
 // REMARKS: holds a line and a corresponding line number. Has methods
 // to be able to get, set, copy and print these properties. 

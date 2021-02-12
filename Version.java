@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------
 // CLASS: Version.java
 //
-// Author: Kajal Tomar, 7793306
+// Author: Kajal Tomar, 
 //
 // REMARKS: Holds a list of lines and information of the list. 
 // It also provides methods to set, access, manipulate and print this 

@@ -1,7 +1,7 @@
 //--------------------------------------------------------
 // CLASS: Testlist.java
 //
-// Author: Kajal Tomar, 7793306
+// Author: Kajal Tomar, 
 //
 // REMARKS: the purpose of this class is to test the 
 // List.java class. 

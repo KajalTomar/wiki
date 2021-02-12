@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------
 // CLASS: List.java
 //
-// Author: Kajal Tomar, 7793306
+// Author: Kajal Tomar, 
 //
 // REMARKS: implementation of a linked list. Holds the head and tail 
 // node. Provied access to the Entity objects help in the Node. 

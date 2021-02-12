@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------
 // CLASS: List.java
 //
-// Author: Kajal Tomar, 7793306
+// Author: Kajal Tomar, 
 //
 // REMARKS: this is an abstract class that defines a abstract print 
 // method for it's children classes. Entity's children classes are

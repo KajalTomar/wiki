@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------
 // CLASS: User.java
 //
-// Author: Kajal Tomar, 7793306
+// Author: Kajal Tomar, 
 //
 // REMARKS: the purpose of this class is to hold information about a 
 // user. It also provides methods to set, access, and print this 

@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------
 // CLASS: Document.java
 //
-// Author: Kajal Tomar, 7793306
+// Author: Kajal Tomar, 
 //
 // REMARKS: holds information about a document (title, a list of all 
 // versions, author, and all the edits done to it). Provides methods
