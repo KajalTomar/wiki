@@ -1,12 +1,7 @@
 //---------------------------------------------------------------------
-// CLASS: Version.java
-//
-// Author: Kajal Tomar, 
-//
 // REMARKS: Holds a list of lines and information of the list. 
 // It also provides methods to set, access, manipulate and print this 
 // the list of lines and the related information.
-// 
 //---------------------------------------------------------------------
 
 class Version extends Entity{
