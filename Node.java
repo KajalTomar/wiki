@@ -1,8 +1,4 @@
 //---------------------------------------------------------------------
-// CLASS: Node.java
-//
-// Author: Kajal Tomar, 
-//
 // REMARKS: this is a node class that holds an object of type Entity.
 // It also provides methods to set, access, and print this 
 // information. It also hold information about the previous and next
