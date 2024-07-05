@@ -1,8 +1,4 @@
 //---------------------------------------------------------------------
-// CLASS: List.java
-//
-// Author: Kajal Tomar, 
-//
 // REMARKS: implementation of a linked list. Holds the head and tail 
 // node. Provied access to the Entity objects help in the Node. 
 // It also provides methods to set, access, manipulate and print the 
