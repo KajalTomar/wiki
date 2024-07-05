@@ -1,8 +1,4 @@
 //---------------------------------------------------------------------
-// CLASS: Document.java
-//
-// Author: Kajal Tomar, 
-//
 // REMARKS: holds information about a document (title, a list of all 
 // versions, author, and all the edits done to it). Provides methods
 // to be able to access, set and manipulate the document. This class
