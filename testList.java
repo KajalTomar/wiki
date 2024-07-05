@@ -1,11 +1,6 @@
 //--------------------------------------------------------
-// CLASS: Testlist.java
-//
-// Author: Kajal Tomar, 
-//
 // REMARKS: the purpose of this class is to test the 
 // List.java class. 
-// 
 //--------------------------------------------------------
 
 import static org.junit.jupiter.api.Assertions.*;
