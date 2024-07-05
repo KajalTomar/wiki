@@ -1,12 +1,7 @@
 //---------------------------------------------------------------------
-// CLASS: User.java
-//
-// Author: Kajal Tomar, 
-//
 // REMARKS: the purpose of this class is to hold information about a 
 // user. It also provides methods to set, access, and print this 
 // information.
-// 
 //---------------------------------------------------------------------
 
 public class User extends Entity{
