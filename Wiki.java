@@ -1,13 +1,8 @@
 //---------------------------------------------------------------------
-// CLASS: Wiki.java
-//
-// Author: Kajal Tomar, 
-//
 // REMARKS: manages a list of documents and users. Allows methods
 // to create, set, manipulate and print objects of type User.class and
 // Document.class (and Version.class and Line.class). 
 // keeps track of a global time.
-// 
 //---------------------------------------------------------------------
 
 public class Wiki{
