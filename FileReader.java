@@ -1,8 +1,4 @@
 //---------------------------------------------------------------------
-// CLASS: FileReader.java
-//
-// Author: Kajal Tomar, 
-//
 // REMARKS: creates a wiki. Reads commands from a text file and 
 // manipulates the wiki (or not) accordingly. 
 // 
